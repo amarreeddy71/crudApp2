@@ -16,7 +16,7 @@ pipeline {
             }
             stage ('Nexus') {
                 steps {
-                    nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'mynexus', groupId: 'maven-Central', nexusUrl: '10.0.2.100:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: '1.${BUILD_NUMBER}'
+                    nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'mynexus', groupId: 'Central', nexusUrl: '10.0.2.100:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '1.${BUILD_NUMBER}'
                 }
             }
             stage ('Docker Build') {
