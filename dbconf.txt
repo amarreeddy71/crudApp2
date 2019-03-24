@@ -1,5 +1,5 @@
 <Resource name="jdbc/crudDB" auth="Container" type="javax.sql.DataSource"
 maxActive="100" maxIdle="30" maxWait="10000"
-username="dinesh" password="Root@1234" driverClassName="com.mysql.jdbc.Driver"
+username="root" password="Root@1234" driverClassName="com.mysql.jdbc.Driver"
 validationQuery="SELECT COUNT(*) FROM student"
-url="jdbc:mysql://mysql2.cryct3jdqjve.us-east-2.rds.amazonaws.com:3306/crudApp"/>
+url="jdbc:mysql://10.0.2.100:3306/crudApp"/>
