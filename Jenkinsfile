@@ -16,7 +16,7 @@ pipeline {
             }
             stage ('Nexus') {
                 steps {
-                    nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'mynexus', groupId: 'Central', nexusUrl: '10.0.2.100:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '1.${BUILD_NUMBER}'
+                    nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'amar_nexus', groupId: 'Central', nexusUrl: '10.0.2.100:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '1.${BUILD_NUMBER}'
 
                 }
             }
@@ -38,7 +38,7 @@ pipeline {
                 } 
                 steps{
                     script {
-                        docker.withRegistry('https://registry.hub.docker.com', 'mydockerhub') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'amar_Docker') {
                             app.push("${env.BUILD_NUMBER}")
                             app.push("latest")
                         }
