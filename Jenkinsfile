@@ -6,7 +6,7 @@ pipeline {
     }
     tools {
         maven 'amar_maven'
-        docker 'docker'
+        Docker 'docker'
     }
         stages {
             stage('Build') {
