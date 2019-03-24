@@ -24,7 +24,7 @@ pipeline {
                     branch 'master'
                 }
                 steps {
-                    sh 'wget http://10.0.2.100:8081/repository/maven-releases/maven-Central/crudApp/1.${BUILD_NUMBER}/crudApp-1.${BUILD_NUMBER}.war -O crudApp.war'
+                    sh 'wget http://10.0.2.100:8081/nexus/service/local/repositories/releases/content/Central/crudApp/1.${BUILD_NUMBER}/crudApp-1.${BUILD_NUMBER}.war -O crudApp.war'
                     script {
                         app = docker.build(DOCKER_IMAGE_NAME)
                     }
@@ -53,7 +53,7 @@ pipeline {
                 }
                 steps {
                     kubernetesDeploy(
-                        kubeconfigId: 'kubeconfig',
+                        kubeconfigId: 'amar_kubernetes',
                         configs: 'canary-kube.yml',
                         enableConfigSubstitution: true
                     )
@@ -84,7 +84,7 @@ pipeline {
                     input 'Deploy to Production?'
                     milestone(1)
                     kubernetesDeploy(
-                        kubeconfigId: 'kubeconfig',
+                        kubeconfigId: 'amar_kubernetes',
                         configs: 'kube',
                         enableConfigSubstitution: true
                     )
