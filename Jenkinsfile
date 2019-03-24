@@ -17,6 +17,7 @@ pipeline {
             stage ('Nexus') {
                 steps {
                     nexusArtifactUploader artifacts: [[artifactId: 'crudApp', classifier: '', file: 'target/crudApp.war', type: 'war']], credentialsId: 'mynexus', groupId: 'Central', nexusUrl: '10.0.2.100:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'releases', version: '1.${BUILD_NUMBER}'
+
                 }
             }
             stage ('Docker Build') {
@@ -32,10 +33,10 @@ pipeline {
                 }
             }
            stage ('Docker Push Image') {
-               when {
+             when {
                     branch 'master'
-                }
-               steps{
+                } 
+                steps{
                     script {
                         docker.withRegistry('https://registry.hub.docker.com', 'mydockerhub') {
                             app.push("${env.BUILD_NUMBER}")
@@ -45,9 +46,10 @@ pipeline {
                 }
             }
             stage('CanaryDeploy') {
-               when {
+              when {
                     branch 'master'
                 }
+
                 environment {
                     CANARY_REPLICAS = 1
                 }
@@ -80,6 +82,7 @@ pipeline {
                 when {
                     branch 'master'
                 }
+
                 steps {
                     input 'Deploy to Production?'
                     milestone(1)
